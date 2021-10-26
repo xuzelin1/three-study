@@ -60,7 +60,7 @@ renderer.shadowMap.enabled = true;
  * 初始化平面
  */
 const planeGeometry = new THREE.PlaneGeometry(14, 104);
-const planeMaterial = new THREE.MeshLambertMaterial({color:0xffffff});
+const planeMaterial = new THREE.MeshPhongMaterial({color:0xffffff});
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 plane.rotation.x = -0.5 * Math.PI;
 plane.position.x = 0;
@@ -115,7 +115,7 @@ function initCube(item: any) {
   const cubeGeometry = new THREE.CylinderGeometry(cubeSize, cubeSize, height, 4);
   const cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
 
-  // cube.castShadow = true;
+  cube.castShadow = true;
   cube.name = 'cube-' + scene.children.length;
 
   cube.position.x = -6 + Math.floor(item.index % 7) * 2
