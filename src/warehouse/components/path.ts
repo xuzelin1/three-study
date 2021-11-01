@@ -24,6 +24,9 @@ export default class PathInit {
    */
   curve: THREE.CatmullRomCurve3;
 
+  positionMap = new Map();
+  lookAtMap = new Map();
+
   constructor(scene: THREE.Scene) {
     this.scene = scene;
 
@@ -55,17 +58,29 @@ export default class PathInit {
       new THREE.BufferGeometry().setFromPoints(points),
       new THREE.LineBasicMaterial({ color: 0x00ff00 })
     ); // 绘制实体线条，仅用于示意曲线，后面的向量线条同理，相关代码就省略了
+
+    for(let i = 0; i <= 1; i += 0.001) {
+      const pos = this.changePosition(i);
+      this.changeLookAt(i, pos);
+    }
     
     this.scene.add(line);
   }
 
   changePosition (t: number){
+    if (this.positionMap.has(t)) {
+      return this.positionMap.get(t);
+    }
     const position = this.curve.getPointAt(t); // t: 当前点在线条上的位置百分比，后面计算
+    this.positionMap.set(t, position);
     return position;
   }
 
   changeLookAt(t: number, position: THREE.Vector3) {
-    const tangent = this.curve.getTangentAt(t);
+    let tangent = this.curve.getTangentAt(t);
+    if (this.lookAtMap.has(t)) {
+      tangent = this.lookAtMap.get(t);
+    }
     const lookAtVec = tangent.add(position); // 位置向量和切线向量相加即为所需朝向的点向量
     return lookAtVec;
   }

@@ -17,7 +17,7 @@ scene.add(camera);
 const controls = new OrbitControls( camera, renderer.domElement );
 
 
-const light = new THREE.SpotLight(0xffffff);
+const light = new THREE.DirectionalLight(0xffffff);
 light.position.set(0, 10, 10);
 scene.add(light);
 
@@ -38,7 +38,7 @@ path.render();
  * 初始化箱子
  */
 const initBox = () => {
-  // setInterval(() => {
+  setInterval(() => {
     /**
      * 模拟生成 box
      */
@@ -48,46 +48,42 @@ const initBox = () => {
     const box = createBox({ width, height, depth });
 
     scene.add(box);
-  // }, 500);
+  }, 500);
   /**
    * 执行 box 动画
    */
   boxAnimation();
 }
 
-let pos = 0;
-const BOX = createBox({ width: 1, height: 1, depth: 1 });
-scene.add(BOX)
+// let pos = 0;
+// const BOX = createBox({ width: 2, height: 2, depth: 2 });
+// scene.add(BOX)
 
 /**
  * 箱子动画
  */
 const boxAnimation = () => {
-  // const children = scene.traverse((e: any) => {
-    // if (e.geometry instanceof THREE.BoxGeometry) {
-    //   if (e.pos === undefined) {
-    //     e.pos = 0;
-    //   }
-    //   e.pos += 0.001;
-    //   if (e.pos > 1) {
-    //     e.pos = 0;
-    //   }
-    //   const position = path.changePosition(e.pos);
-    //   e.position.copy(position);
-    // }
-  // })
-  const children = scene.children;
-  
-
-  pos += 0.001;
-  if (pos > 1) {
-    pos = 0;
+  const children: any = scene.children;
+  for(let e of children) {
+    if (e.geometry instanceof THREE.BoxGeometry) {
+      if (e.pos === undefined) {
+        e.pos = 0;
+      }
+      e.pos += 0.001;
+      if (e.pos > 1) {
+        e.pos = 0;
+        scene.remove(e);
+      } else {
+        const position = path.changePosition(e.pos);
+        const lookAtVec = path.changeLookAt(e.pos, position);
+        e.position.copy(position);
+        e.lookAt(lookAtVec);
+      }
+    }
   }
-  const position = path.changePosition(pos);
-  const lookAtVec = path.changeLookAt(pos, position);
-  BOX.position.copy(position);
-  BOX.lookAt(lookAtVec);
+
 	requestAnimationFrame( boxAnimation );
+  renderer.render(scene, camera);
 }
 
 const render = () => {
