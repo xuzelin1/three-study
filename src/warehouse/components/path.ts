@@ -56,7 +56,7 @@ export default class PathInit {
     const points = this.curve.getPoints(50); // 50等分获取曲线点数组
     const line = new THREE.LineLoop(
       new THREE.BufferGeometry().setFromPoints(points),
-      new THREE.LineBasicMaterial({ color: 0x00ff00 })
+      new THREE.LineBasicMaterial({ color: 0xffffff })
     ); // 绘制实体线条，仅用于示意曲线，后面的向量线条同理，相关代码就省略了
 
     for(let i = 0; i <= 1; i += 0.001) {

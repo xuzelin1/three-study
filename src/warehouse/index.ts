@@ -77,6 +77,7 @@ const boxAnimation = () => {
         const position = path.changePosition(e.pos);
         const lookAtVec = path.changeLookAt(e.pos, position);
         e.position.copy(position);
+        e.position.y = 0.5;
         e.lookAt(lookAtVec);
       }
     }
