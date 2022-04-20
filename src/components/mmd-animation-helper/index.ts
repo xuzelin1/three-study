@@ -3,7 +3,7 @@ import Stats from 'stats.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { MMDLoader } from 'three/examples/jsm/loaders/MMDLoader.js';
 import { MMDAnimationHelper } from 'three/examples/jsm/animation/MMDAnimationHelper.js';
-import { MMDPhysics } from 'three/examples/jsm/animation/MMDPhysics.js'
+// import { MMDPhysics } from 'three/examples/jsm/animation/MMDPhysics.js'
 const clock = new THREE.Clock();
 
 var stats = new Stats();
