@@ -2,18 +2,34 @@ import * as THREE from'three';
 import Basic from "./Basic";
 
 
-import floorBackgroundVertex from '../shaders/floorBackground/vertex.glsl';
-import floorBackgroundFragment from '../shaders/floorBackground/vertex.glsl'
+const floorBackgroundVertex = `
+varying vec3 vColor;
+
+void main()
+{
+    gl_Position = vec4(position, 1.0);
+
+    vColor = color;
+}
+`
+const floorBackgroundFragment = `
+varying vec3 vColor;
+
+void main()
+{
+    gl_FragColor = vec4(vColor, 1.0);
+}
+`
 
 /**
  * the floor component
  */
 export default class Floor extends Basic {
   background: any;
+
   constructor() {
     super();
 
-    console.log(12345678);
     this.setBackground();
   }
 
@@ -27,19 +43,19 @@ export default class Floor extends Basic {
     this.background.colors = {}
 
     this.background.colors.topLeft = {}
-    this.background.colors.topLeft.value = '#85902B'
+    this.background.colors.topLeft.value = '#e78d4d'
     this.background.colors.topLeft.instance = new THREE.Color(this.background.colors.topLeft.value)
 
     this.background.colors.topRight = {}
-    this.background.colors.topRight.value = '#7C8627'
+    this.background.colors.topRight.value = '#f09554'
     this.background.colors.topRight.instance = new THREE.Color(this.background.colors.topRight.value)
 
     this.background.colors.bottomLeft = {}
-    this.background.colors.bottomLeft.value = '#C6CD60'
+    this.background.colors.bottomLeft.value = '#efb991'
     this.background.colors.bottomLeft.instance = new THREE.Color(this.background.colors.bottomLeft.value)
 
     this.background.colors.bottomRight = {}
-    this.background.colors.bottomRight.value = '#9FA73F'
+    this.background.colors.bottomRight.value = '#f5d09a'
     this.background.colors.bottomRight.instance = new THREE.Color(this.background.colors.bottomRight.value)
 
     // Geometry
@@ -49,6 +65,8 @@ export default class Floor extends Basic {
     this.background.material = new THREE.ShaderMaterial({
         vertexColors: true,
         depthWrite: false,
+        vertexShader: floorBackgroundVertex,
+        fragmentShader: floorBackgroundFragment
     })
 
     // Mesh

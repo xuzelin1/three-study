@@ -3,6 +3,7 @@ import Camera from './common/camera';
 import Basic from './components/Basic';
 import World from './components/World';
 import { GlobalConfig } from './type';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class CarController extends Basic {
   static instance: CarController;
@@ -54,16 +55,19 @@ export default class CarController extends Basic {
    */
   setRender() {
     this.camera = new Camera(this.scene);
+
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(this.config.width, this.config.height);
     this.renderer.setClearColor(0x000000);
     document.body.appendChild(this.renderer.domElement);
+    const controls = new OrbitControls(this.camera.instance, this.targetElement);
+    
+    console.log(controls);
     
     const cameraAnimate = () => {
-      requestAnimationFrame( cameraAnimate );
-      // console.log(this.renderer, this.scene, this.camera.instance);
-      
+      controls.update();
       this.renderer.render(this.scene, this.camera.instance);
+      requestAnimationFrame(cameraAnimate);
     }
     cameraAnimate();
   }
