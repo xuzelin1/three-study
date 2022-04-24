@@ -3,7 +3,7 @@ import Camera from './common/camera';
 import Basic from './components/Basic';
 import World from './components/World';
 import { GlobalConfig } from './type';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 
 export default class CarController extends Basic {
   static instance: CarController;
@@ -60,12 +60,28 @@ export default class CarController extends Basic {
     this.renderer.setSize(this.config.width, this.config.height);
     this.renderer.setClearColor(0x000000);
     document.body.appendChild(this.renderer.domElement);
-    const controls = new OrbitControls(this.camera.instance, this.targetElement);
+    const controls = new FirstPersonControls(this.camera.instance, this.renderer.domElement);
+
+    // controls.screenSpacePanning = false;
+    // controls.enableKeys = false
+    // controls.zoomSpeed = 0.25
+    // controls.enableDamping = true
+    // controls.keys = {
+    //   LEFT: 'ArrowLeft', //left arrow
+    //   UP: 'ArrowUp', // up arrow
+    //   RIGHT: 'ArrowRight', // right arrow
+    //   BOTTOM: 'ArrowDown' // down arrow
+    // }
+
+    const light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(0, 10, 10);
+    this.scene.add(light);
+
     
     console.log(controls);
     
     const cameraAnimate = () => {
-      controls.update();
+      // controls.update();
       this.renderer.render(this.scene, this.camera.instance);
       requestAnimationFrame(cameraAnimate);
     }

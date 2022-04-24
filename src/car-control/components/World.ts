@@ -19,7 +19,7 @@ export default class World extends Basic {
   constructor() {
     super();
 
-    // this.setFloor();
+    this.setFloor();
     this.setCar();
   }
   
