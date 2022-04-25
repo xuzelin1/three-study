@@ -3,7 +3,7 @@ import Camera from './common/camera';
 import Basic from './components/Basic';
 import World from './components/World';
 import { GlobalConfig } from './type';
-import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class CarController extends Basic {
   static instance: CarController;
@@ -60,7 +60,7 @@ export default class CarController extends Basic {
     this.renderer.setSize(this.config.width, this.config.height);
     this.renderer.setClearColor(0x000000);
     document.body.appendChild(this.renderer.domElement);
-    const controls = new FirstPersonControls(this.camera.instance, this.renderer.domElement);
+    const controls = new OrbitControls(this.camera.instance, this.renderer.domElement);
 
     // controls.screenSpacePanning = false;
     // controls.enableKeys = false

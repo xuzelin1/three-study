@@ -28,7 +28,8 @@ export default class Camera {
       0.1,
       1000
     );
-    this.instance.position.set(0, 10, 50);
+    this.instance.position.set(30, 30, 50);
+    this.instance.lookAt(0, 0, 0);
     const helper = new THREE.CameraHelper(this.instance);
     scene.add(helper);
   }

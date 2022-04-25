@@ -1,3 +1,4 @@
+import Controls from "../common/Controls";
 import Basic from "./Basic";
 import Car from "./Car";
 import Floor from "./Floor";
@@ -16,11 +17,17 @@ export default class World extends Basic {
    */
   car!: Car;
 
+  /**
+   * the control instance
+   */
+  controls!: Controls;
+
   constructor() {
     super();
 
     this.setFloor();
     this.setCar();
+    this.setControls();
   }
   
   setCar() {
@@ -28,5 +35,10 @@ export default class World extends Basic {
   }
   setFloor() {
     this.floor = new Floor();
+  }
+  setControls() {
+    this.controls = new Controls({
+      car: this.car,
+    });
   }
 }
