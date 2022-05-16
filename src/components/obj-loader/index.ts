@@ -29,7 +29,7 @@ camera.position.z = 2;
 // // camera.position.x = 0; 
 // // camera.position.y = 120; 
 // // camera.position.z = 0; 
-camera.lookAt(scene.position); 
+camera.lookAt(scene.position);
 
 const controls = new OrbitControls( camera, renderer.domElement );
 function cameraAnimate() {

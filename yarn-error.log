@@ -1,0 +1,59 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.18/libexec/bin/yarn.js add CANNON
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  12.22.8
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: http://npm.shopee.io/CANNON: no such package available
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.18/libexec/lib/cli.js:66138:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.18/libexec/lib/cli.js:140883:22)
+      at Request.emit (events.js:314:20)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.18/libexec/lib/cli.js:141855:10)
+      at Request.emit (events.js:314:20)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.18/libexec/lib/cli.js:141777:12)
+      at Object.onceWrapper (events.js:420:28)
+      at IncomingMessage.emit (events.js:326:22)
+      at endReadableNT (_stream_readable.js:1241:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "vite-project",
+    "version": "0.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "serve": "vite preview"
+    },
+    "dependencies": {
+      "dat.gui": "^0.7.7",
+      "stats.js": "^0.17.0",
+      "three": "^0.133.1",
+      "vue": "^3.2.16"
+    },
+    "devDependencies": {
+      "@types/dat.gui": "^0.7.7",
+      "@types/stats": "^0.16.30",
+      "@types/three": "^0.133.1",
+      "@vitejs/plugin-vue": "^1.9.3",
+      "typescript": "^4.4.3",
+      "vite": "^2.6.4",
+      "vue-tsc": "^0.3.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

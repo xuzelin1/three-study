@@ -14,7 +14,7 @@ export default class Controls {
       
       switch (e.key) {
         case 'ArrowUp':
-          this.car.instance.translateX(1);
+          this.car.instance.translateZ(0.8);
       }
     })
   }
