@@ -27,21 +27,31 @@ const initCannonWorld = () => {
 }
 
 const initCannonPlaneAndBall = () => {
+  const sphere_cm = new CANNON.Material("sphere_cm");
   const sphereShape = new CANNON.Sphere(1);
   sphereBody = new CANNON.Body({
     mass: 5,
     position: new CANNON.Vec3(0, 10, 0),
     shape: sphereShape,
+    material: sphere_cm,
   });
   world.addBody(sphereBody);
 
+  const ground_cm = new CANNON.Material('ground_cm');
   const groundShape = new CANNON.Plane();
   const groundBody = new CANNON.Body({
     mass: 0,
     shape: groundShape,
+    material: ground_cm,
   })
   groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
   world.addBody(groundBody);
+
+  const sphere_ground_cm = new CANNON.ContactMaterial(ground_cm, sphere_cm, {
+    friction: 1,
+    restitution: 0.3,
+  })
+  world.addContactMaterial(sphere_ground_cm);
 }
 
 const initThreeWorld = () => {
@@ -52,15 +62,21 @@ const initThreeWorld = () => {
 		1,
 		100
 	);
-	camera.position.z = 5;
+  camera.position.x = 0;
+  camera.position.y = 30;
+  camera.position.z = 10;
+  camera.lookAt(scene.position);
   const axes = new THREE.AxesHelper(20);
-	scene.add(camera, axes);
+  const light = new THREE.DirectionalLight(0xff0000);
+	scene.add(camera, light, axes);
 
-  const groundGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+  const groundGeometry = new THREE.PlaneGeometry(20, 20, 32);
   const groundMaterial = new THREE.MeshBasicMaterial({
-    color: 0xffffff
+    color: 0x7f7f7f,
+    side: THREE.DoubleSide
   });
   const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+  ground.rotation.set(-Math.PI / 2, 0, 0);
   scene.add(ground);
 
   const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
