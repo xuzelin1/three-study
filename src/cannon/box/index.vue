@@ -5,7 +5,7 @@
 <script lang="ts">
 export default {
   mounted() {
-    import ('./index');
+    import ('./index2');
   },
 }
 </script>

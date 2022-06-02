@@ -30,8 +30,8 @@ const initCannonPlaneAndBall = () => {
   const sphere_cm = new CANNON.Material("sphere_cm");
   const sphereShape = new CANNON.Sphere(1);
   sphereBody = new CANNON.Body({
-    mass: 5,
-    position: new CANNON.Vec3(0, 10, 0),
+    mass: 1,
+    position: new CANNON.Vec3(0, 5, 0),
     shape: sphereShape,
     material: sphere_cm,
   });
@@ -44,7 +44,7 @@ const initCannonPlaneAndBall = () => {
     shape: groundShape,
     material: ground_cm,
   })
-  groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+  groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI / 2);
   world.addBody(groundBody);
 
   const sphere_ground_cm = new CANNON.ContactMaterial(ground_cm, sphere_cm, {
